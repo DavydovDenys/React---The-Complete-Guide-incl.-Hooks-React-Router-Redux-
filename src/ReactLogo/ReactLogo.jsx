@@ -21,4 +21,3 @@ const ReactLogo = () => {
   );
 }
 
-export default ReactLogo;
