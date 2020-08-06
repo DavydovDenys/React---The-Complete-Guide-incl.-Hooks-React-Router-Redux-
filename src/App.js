@@ -50,32 +50,35 @@ const App = (props) => {
     setShow(!doesShow);
   }
 
+  let persons = null;
+
+  if (show) {
+    persons = (
+      <div>
+        <Person
+          name={personState.persons[0].name}
+          age={personState.persons[0].age}
+          click={switchNameHandler.bind(this, 'Maximilian')}
+        >I'm children props!</Person>
+        <Person
+          name={personState.persons[1].name}
+          age={personState.persons[1].age}
+          change={nameChangedHandler}
+        />
+        <Person
+          name={personState.persons[2].name}
+          age={personState.persons[2].age}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       <h1>Hi, I'm a React App</h1>
       <p>This is really working</p>
       <button style={style} onClick={togglePersonsHandler}>Toggle Persons</button>
-
-      {
-        show === true ?
-        <div>
-          <Person
-            name={personState.persons[0].name}
-            age={personState.persons[0].age}
-            click={switchNameHandler.bind(this, 'Maximilian')}
-          >I'm children props!</Person>
-          <Person
-            name={personState.persons[1].name}
-            age={personState.persons[1].age}
-            change={nameChangedHandler}
-          />
-          <Person
-            name={personState.persons[2].name}
-            age={personState.persons[2].age}
-          />
-        </div>
-        : null
-      }
+      {persons}
     </div>
   );
 }
