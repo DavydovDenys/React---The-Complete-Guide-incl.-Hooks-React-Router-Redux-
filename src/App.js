@@ -7,9 +7,9 @@ const App = (props) => {
 
   const [personState, setPersonsState] = useState({
     persons: [
-      {name: 'Max', age: 27},
-      {name: 'Arnold', age: 29},
-      {name: 'Stephanie', age: 26},
+      {id: 1, name: 'Max', age: 27},
+      {id: 2, name: 'Arnold', age: 29},
+      {id: 3, name: 'Stephanie', age: 26},
     ],
     otherState: 'some other value',
     showPersons: false
@@ -35,6 +35,14 @@ const App = (props) => {
     });
   }
 
+  const deletePersonHandler = (personIndex) => {
+    const persons = personState.persons;
+    persons.splice(personIndex, 1)
+    setPersonsState({persons: persons,
+      otherState: 'some other value',
+      showPersons: false})
+  }
+
   const style = {
     backgroundColor: 'white',
     font: 'inherit',
@@ -55,11 +63,13 @@ const App = (props) => {
   if (show) {
     persons = (
       <div>
-        {personState.persons.map(person => {
+        {personState.persons.map((person, index) => {
           return <Person
             name={person.name}
-            age={person.age}/>
-        })};
+            age={person.age}
+            id={person.id}
+            click={() => {deletePersonHandler(index)}}/>
+        })}
       </div>
     )
   }
