@@ -36,7 +36,8 @@ const App = (props) => {
   }
 
   const deletePersonHandler = (personIndex) => {
-    const persons = personState.persons;
+    /*const persons = personState.persons.slice();*/
+    const persons = [...personState.persons];
     persons.splice(personIndex, 1)
     setPersonsState({persons: persons,
       otherState: 'some other value',
@@ -67,7 +68,7 @@ const App = (props) => {
           return <Person
             name={person.name}
             age={person.age}
-            id={person.id}
+            key={person.id}
             click={() => {deletePersonHandler(index)}}/>
         })}
       </div>
